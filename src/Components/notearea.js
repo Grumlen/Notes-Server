@@ -11,6 +11,8 @@ const mapStateToNoteListProps = (state) => {
       title: n.title,
       contents: n.contents,
       edit: n.edit,
+      created: n.created,
+      lastEdit: n.lastEdit,
     }
   ));
   return {notes};
@@ -21,7 +23,7 @@ const NoteArea = (props) => (
     {
       props.notes.map((n,index) => (
         n.edit ?
-          <NoteEdit note={n} key={index}/> :
+          <NoteEdit n={n.id} key={index}/> :
           <NoteDisplay note={n} key={index}/>
       ))
     }
@@ -30,7 +32,8 @@ const NoteArea = (props) => (
 );
 
 const NoteAreaDisplay = connect(
-  mapStateToNoteListProps
+  mapStateToNoteListProps,
+  undefined
 )(NoteArea);
 
 export default NoteAreaDisplay;
