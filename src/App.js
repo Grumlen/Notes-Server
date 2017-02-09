@@ -1,11 +1,15 @@
 import React from 'react';
 import './App.css';
-import Main from './Components/main'
+import Header from './Components/header';
+import NoteArea from './Components/notearea';
+import Footer from './Components/footer';
 // import reducer from './Helpers/reducers'
 
 const App = () => ( // Completed
   <div>
-    <Main />
+    <Header />
+    <NoteArea />
+    <Footer />
   </div>
 );
 
