@@ -20,8 +20,8 @@ const NoteDisplay = (props) => (
           >Delete</button>
         </div>
         <div className='ui segment'>
-          <span>Created: {props.note.created.slice(4,24)}</span>
-          {props.note.lastEdit ? (<span>, Last Edit: {props.note.lastEdit.slice(4,24)}</span>):null}
+          <span>{ 'Created: '+props.note.created.slice(4,24)}</span>
+          {props.note.lastEdit ? (<span>{', Last Edit: '+props.note.lastEdit.slice(4,24)}</span>):null}
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Header from './header';
 import { shallow } from 'enzyme';
+import Header from './header';
 
 describe('<Header />', () => {
   const wrapper = shallow(<Header />);

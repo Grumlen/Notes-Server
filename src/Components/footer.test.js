@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Footer from './footer';
 import { shallow } from 'enzyme';
+import Footer from './footer';
 
 describe('<Footer />', () => {
   const wrapper = shallow(<Footer />);
