@@ -1,28 +1,18 @@
-function reducer(state = [
-  {
-    id: 'a',
-    title: 'Note1',
-    contents: 'Note1 Contents',
-    edit: true,
-    created: 'Tue Jan 25',
-    lastEdit: 'Wed Feb 03',
-  },
-  {
-    id: 'b',
-    title: 'Note2',
-    contents: 'Note2 Contents',
-    edit: false,
-    created: 'Thu Jan 15',
-  },
-  {
-    id: 'c',
-    title: 'Note3',
-    contents: 'Note3 Contents',
-    edit: false,
-    created: 'Fri Jan 20',
-    lastEdit: 'Sun Feb 13',
-  },
-],action) {
+import { save, retrieve } from './store';
+
+function reducer(state = retrieve(),action) {
+  if (action.type==='ADD_NOTE') {
+    const note = {
+      id: action.id,
+      title: action.title,
+      contents: action.contents,
+      edit: false,
+      created: action.created
+    };
+    const notes = state.concat(note);
+    save(notes);
+    return notes;
+  }
   const index = state.findIndex((n) => n.id === action.id);
   switch (action.type) {
     case 'SAVE_NOTE': {
@@ -31,36 +21,32 @@ function reducer(state = [
       note.contents = action.contents;
       note.edit = false;
       note.lastEdit = action.lastEdit;
-      return [
+      const notes = [
         ...state.slice(0,index),
         note,
         ...state.slice(index+1, state.length)
       ];
-    }
-    case 'ADD_NOTE': {
-      const note = {
-        id: action.id,
-        title: action.title,
-        contents: action.contents,
-        edit: false,
-        created: action.created
-      };
-      return state.concat(note);
+      save(notes);
+      return notes;
     }
     case 'EDIT_NOTE': {
       const note = state[index];
       note.edit = true;
-      return [
+      const notes = [
         ...state.slice(0,index),
         note,
         ...state.slice(index+1, state.length)
       ];
+      save(notes);
+      return notes;
     }
     case 'DELETE_NOTE': {
-      return [
+      const notes = [
         ...state.slice(0,index),
         ...state.slice(index+1, state.length)
       ];
+      save(notes);
+      return notes;
     }
     default: {
       return state;
