@@ -1,13 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {editNote, deleteNote} from '../Helpers/actions'
-
-const mapDispatchToNoteProps = (dispatch) => (
-  {
-    onEditClick: (id) => (dispatch(editNote(id))),
-    onDeleteClick: (id) => (dispatch(deleteNote(id))),
-  }
-);
 
 const NoteDisplay = (props) => (
   <div className='ui text container'>
@@ -37,9 +28,4 @@ const NoteDisplay = (props) => (
   </div>
 );
 
-const NoteRender = connect(
-  undefined,
-  mapDispatchToNoteProps
-)(NoteDisplay);
-
-export default NoteRender;
+export default NoteDisplay;

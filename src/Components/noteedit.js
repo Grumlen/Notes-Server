@@ -1,26 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {saveNote} from '../Helpers/actions'
 import NoteField from './notefield';
-
-const mapStatetoNoteEditProps = (state, ownProps) => {
-  const currentNote = state.filter((n) => n.id === ownProps.n)[0];
-  return {currentNote};
-}
-
-const mapDispatchToNoteEditProps = (dispatch) => (
-  {
-    onSaveClick: (id, title, contents, lastEdit) => (dispatch(saveNote(id, title, contents, lastEdit))),
-  }
-);
+import uuid from 'uuid';
 
 class NoteEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.currentNote.id,
-      title: props.currentNote.title,
-      contents: props.currentNote.contents,
+      id: props.note.id,
+      title: props.note.title,
+      contents: props.note.contents,
     }
   }
   onTitleChange(e) {
@@ -36,13 +24,20 @@ class NoteEdit extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const note = this.state;
-    this.props.onSaveClick(note.id, note.title, note.contents, Date());
+    this.props.onClick(note.id, note.title, note.contents, Date());
+    if (this.props.label==='Add') {
+      const note = this.state;
+      note.id = uuid.v4();
+      note.title = '';
+      note.contents = '';
+      this.setState(note);
+    }
   }
 
   render() {
     return (
       <NoteField
-        label='Save'
+        label={this.props.label}
         title={this.state.title}
         contents={this.state.contents}
         onTitleChange={this.onTitleChange.bind(this)}
@@ -53,9 +48,4 @@ class NoteEdit extends React.Component {
   }
 }
 
-const NoteEditRender = connect(
-  mapStatetoNoteEditProps,
-  mapDispatchToNoteEditProps
-)(NoteEdit);
-
-export default NoteEditRender;
+export default NoteEdit;

@@ -1,8 +1,17 @@
 import React from 'react';
 import NoteDisplay from './notedisplay';
 import NoteEdit from './noteedit';
-import NewNote from './newnote';
 import {connect} from 'react-redux';
+import {saveNote,editNote,deleteNote,addNote} from '../Helpers/actions'
+import uuid from 'uuid';
+const mapDispatchToNoteEditProps = (dispatch) => (
+  {
+    onSaveClick: (id, title, contents, lastEdit) => (dispatch(saveNote(id, title, contents, lastEdit))),
+    onEditClick: (id) => (dispatch(editNote(id))),
+    onDeleteClick: (id) => (dispatch(deleteNote(id))),
+    onAddClick: (id, title, contents, created) => (dispatch(addNote(id, title, contents, created))),
+  }
+);
 
 const mapStateToNoteListProps = (state) => {
   const notes = state.map(n=> (
@@ -23,17 +32,31 @@ const NoteArea = (props) => (
     {
       props.notes.map((n,index) => (
         n.edit ?
-          <NoteEdit n={n.id} key={index}/> :
-          <NoteDisplay note={n} key={index}/>
+          <NoteEdit
+            note={n}
+            label={'Save'}
+            key={index}
+            onClick={props.onSaveClick}
+          /> :
+          <NoteDisplay
+            note={n}
+            key={index}
+            onEditClick={props.onEditClick}
+            onDeleteClick={props.onDeleteClick}
+          />
       ))
     }
-    <NewNote />
+    <NoteEdit
+      note={{id:uuid.v4(), title:'', contents:''}}
+      label={'Add'}
+      onClick={props.onAddClick}
+    />
   </div>
 );
 
 const NoteAreaDisplay = connect(
   mapStateToNoteListProps,
-  undefined
+  mapDispatchToNoteEditProps
 )(NoteArea);
 
 export default NoteAreaDisplay;
