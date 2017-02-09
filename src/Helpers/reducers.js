@@ -3,12 +3,10 @@ import { save, retrieve } from './store';
 function reducer(state = retrieve(),action) {
   if (action.type==='ADD_NOTE') {
     const note = {
-      id: action.id,
-      title: action.title,
-      contents: action.contents,
       edit: false,
-      created: action.created
+      ...action
     };
+    delete note.type;
     const notes = state.concat(note);
     save(notes);
     return notes;
@@ -16,11 +14,12 @@ function reducer(state = retrieve(),action) {
   const index = state.findIndex((n) => n.id === action.id);
   switch (action.type) {
     case 'SAVE_NOTE': {
-      const note = state[index];
-      note.title = action.title;
-      note.contents = action.contents;
-      note.edit = false;
-      note.lastEdit = action.lastEdit;
+      const note = {
+        edit: false,
+        created: state[index].created,
+        ...action
+      };
+      delete note.type;
       const notes = [
         ...state.slice(0,index),
         note,

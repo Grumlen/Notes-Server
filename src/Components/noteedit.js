@@ -10,6 +10,9 @@ class NoteEdit extends React.Component {
       title: props.note.title,
       contents: props.note.contents,
     }
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onContentsChange = this.onContentsChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
   onTitleChange(e) {
     const note = this.state;
@@ -40,9 +43,9 @@ class NoteEdit extends React.Component {
         label={this.props.label}
         title={this.state.title}
         contents={this.state.contents}
-        onTitleChange={this.onTitleChange.bind(this)}
-        onContentsChange={this.onContentsChange.bind(this)}
-        onFormSubmit={this.onFormSubmit.bind(this)}
+        onTitleChange={this.onTitleChange}
+        onContentsChange={this.onContentsChange}
+        onFormSubmit={this.onFormSubmit}
       />
     );
   }
