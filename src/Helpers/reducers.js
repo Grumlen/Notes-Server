@@ -1,50 +1,35 @@
-import { save, retrieve } from './store';
+import { retrieveAll } from './store';
 
-function reducer(state = retrieve(),action) {
-  if (action.type==='ADD_NOTE') {
-    const note = {
-      edit: false,
-      ...action
-    };
-    delete note.type;
-    const notes = state.concat(note);
-    save(notes);
-    return notes;
-  }
-  const index = state.findIndex((n) => n.id === action.id);
+function reducer(state = retrieveAll(),action) {
   switch (action.type) {
+    case 'ADD_NOTE': {
+      const notes = state.concat(action.note);
+      return notes;
+    }
     case 'SAVE_NOTE': {
-      const note = {
-        edit: false,
-        created: state[index].created,
-        ...action
-      };
-      delete note.type;
+      const index = state.findIndex((n) => n.id === action.note.id);
       const notes = [
         ...state.slice(0,index),
-        note,
+        action.note,
         ...state.slice(index+1, state.length)
       ];
-      save(notes);
       return notes;
     }
     case 'EDIT_NOTE': {
-      const note = state[index];
-      note.edit = true;
+      const index = state.findIndex((n) => n.id === action.note.id);
       const notes = [
         ...state.slice(0,index),
-        note,
+        action.note,
         ...state.slice(index+1, state.length)
       ];
-      save(notes);
       return notes;
     }
     case 'DELETE_NOTE': {
+      const index = state.findIndex((n) => n.id === action.id);
       const notes = [
         ...state.slice(0,index),
         ...state.slice(index+1, state.length)
       ];
-      save(notes);
       return notes;
     }
     default: {

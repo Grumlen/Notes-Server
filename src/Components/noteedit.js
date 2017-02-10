@@ -27,14 +27,11 @@ class NoteEdit extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const note = this.state;
-    this.props.onClick(note.id, note.title, note.contents, Date());
-    if (this.props.label==='Add') {
-      const note = this.state;
-      note.id = uuid.v4();
-      note.title = '';
-      note.contents = '';
-      this.setState(note);
-    }
+    this.props.onAEClick(note.id, note.title, note.contents);
+    note.id = uuid.v4();
+    note.title = '';
+    note.contents = '';
+    this.setState(note);
   }
 
   render() {

@@ -6,21 +6,23 @@ describe('NoteDisplay', () => {
   let wrapper;
   const onEditClick = jest.fn();
   const onDeleteClick = jest.fn();
-  describe('renders', () => {
-    beforeEach(() => {
-      wrapper = shallow(<NoteDisplay
-                          note={
-                            {
-                              id: 'abc',
-                              title:'Note1',
-                              contents:'Contents1',
-                              created:'Thu Feb 09 2017 16:20:10 GMT-0600 (CST)',
-                              lastEdit:'Thu Feb 09 2017 16:20:10 GMT-0600 (CST)',
-                              edit: false,
-                            }
+  beforeEach(() => {
+    wrapper = shallow(<NoteDisplay
+                        note={
+                          {
+                            id: 'abc',
+                            title:'Note1',
+                            contents:'Contents1',
+                            created:'Thu Feb 09 2017 16:20:10 GMT-0600 (CST)',
+                            lastEdit:'Thu Feb 09 2017 16:20:10 GMT-0600 (CST)',
+                            edit: false,
                           }
-                        />);
-    });
+                        }
+                        onEditClick={onEditClick}
+                        onDeleteClick={onDeleteClick}
+                      />);
+  });
+  describe('renders', () => {
     it('without crashing', () => {
       expect(wrapper.exists()).toBe(true);
     });
@@ -37,10 +39,36 @@ describe('NoteDisplay', () => {
       expect(wrapper.contains(<span>, Last Edit: Feb 09 2017 16:20:10</span>)).toBe(true);
     });
     it('edit button', () => {
-      expect(wrapper.find('button').get(0).props.children).toEqual('Edit');
+      expect(wrapper.find('button').first().contains('Edit')).toBe(true);
     });
     it('delete button', () => {
-      expect(wrapper.find('button').get(1).props.children).toEqual('Delete');
+      expect(wrapper.find('button').last().contains('Delete')).toBe(true);
+    });
+    describe('does not render', () => {
+      wrapper = shallow(<NoteDisplay
+                          note={
+                            {
+                              id: 'abc',
+                              title:'Note1',
+                              contents:'Contents1',
+                              created:'Thu Feb 09 2017 16:20:10 GMT-0600 (CST)',
+                              edit: false,
+                            }
+                          }
+                        />);
+      it('lastEdit when not present', () => {
+        expect(wrapper.contains(<span>, Last Edit: </span>)).toBe(false);
+      });
+    });
+  });
+  describe('behavior of', () => {
+    it('edit button works', () => {
+      const editClick = wrapper.find('button').first().simulate('click');
+      expect(onEditClick.mock.calls[0]).toEqual(['abc']);
+    });
+    it('delete button works', () => {
+      const deleteClick = wrapper.find('button').last().simulate('click');
+      expect(onDeleteClick.mock.calls[0]).toEqual(['abc']);
     });
   });
 });

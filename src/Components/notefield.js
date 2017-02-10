@@ -5,8 +5,10 @@ const NoteField = (props) => (
     <div className='ui segments'>
       <form className='ui form' onSubmit={props.onFormSubmit}>
         <input
+          autoComplete='off'
           type='text'
           placeholder='Title'
+          name='title'
           value={props.title}
           onChange={props.onTitleChange}
         />
