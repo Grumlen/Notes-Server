@@ -1,25 +1,31 @@
 {
-  "name": "Notes-React",
-  "version": "0.1.0",
-  "private": true,
+  "name": "notes-server",
+  "version": "1.0.0",
+  "description": "Notes React App with Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node --presets node6 index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grumlen/Notes-Server.git"
+  },
+  "author": "Nathan Christian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grumlen/Notes-Server/issues"
+  },
+  "homepage": "https://github.com/Grumlen/Notes-Server#readme",
   "devDependencies": {
-    "react-addons-test-utils": "^15.4.2",
-    "react-scripts": "0.8.5"
+    "babel-cli": "^6.23.0",
+    "babel-preset-node6": "^11.0.0",
+    "morgan": "^1.8.1"
   },
   "dependencies": {
-    "enzyme": "^2.7.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "semantic-ui": "^2.2.7",
-    "semantic-ui-react": "^0.64.7",
-    "uuid.v4": "^1.0.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.2",
+    "redux-thunk": "^2.2.0"
   }
 }

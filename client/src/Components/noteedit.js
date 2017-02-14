@@ -9,7 +9,7 @@ class NoteEdit extends React.Component {
       id: props.note.id,
       title: props.note.title,
       contents: props.note.contents,
-    }
+    };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentsChange = this.onContentsChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -27,6 +27,7 @@ class NoteEdit extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const note = this.state;
+    console.log(note.id)
     this.props.onAEClick(note.id, note.title, note.contents);
     note.id = uuid.v4();
     note.title = '';
