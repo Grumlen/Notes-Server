@@ -11,7 +11,7 @@ var notesSchema = new mongoose.Schema({
   },
   contents: {
     type: String,
-    required: true,
+    required: false,
   },
   created: {
     type: String,

@@ -46,6 +46,11 @@ function editNote(id) {
   return { type: 'EDIT_NOTE', note };
 }
 
+function cancelNote(id) {
+  const note = { id, edit: false };
+  return { type: 'EDIT_NOTE', note };
+}
+
 function addNote(id, title, contents) {
   const note = {
     id,
@@ -73,13 +78,13 @@ function addNote(id, title, contents) {
 }
 
 function saveNote(id, title, contents) {
-  console.log(id)
   const note = {
     id,
     title: title==='' ? 'Untitled' : title,
     contents,
     lastEdit: Date(),
   };
+  console.log(note);
   return (dispatch) => {
     dispatch(isLoading(true));
     fetch('/notes/'+id, {
@@ -117,4 +122,4 @@ function deleteNote(id) {
   }
 }
 
-export { deleteNote, addNote, saveNote, editNote, getNotes };
+export { deleteNote, addNote, saveNote, editNote, getNotes, cancelNote };

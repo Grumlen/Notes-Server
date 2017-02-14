@@ -18,9 +18,15 @@ const NoteField = (props) => (
           value={props.contents}
           onChange={props.onContentsChange}
         />
-        <button className='ui primary button' type='submit' >
+        <button className='ui primary button' type='submit'>
           {props.label}
         </button>
+        {
+          props.cancelButton ?
+          <button className='ui primary button' onClick={props.cancelButton}>
+            Cancel
+          </button> : null
+        }
       </form>
     </div>
   </div>

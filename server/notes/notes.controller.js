@@ -13,8 +13,16 @@ function createNote(req,res,next) {
 }
 
 function updateNote(req,res,next) {
-  Notes.findOneAndUpdate(req.params.id,req.body)
-    .then((notes) => res.send(notes))
+  console.log(req.params.id)
+  Notes.updateOne({id:req.params.id},req.body)
+    .then((result) => {
+      if(result.nModified===1){
+        res.send(req.body)
+      }else{
+        res.status(400).send({message:"something wrong"})
+      }
+
+    })
     .catch((err) => next(err))
 }
 

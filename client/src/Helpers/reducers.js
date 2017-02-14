@@ -36,9 +36,7 @@ function reducerNotes(state,action) {
       return notes;
     }
     case 'EDIT_NOTE': {
-      console.log(action.note.id,state)
       const index = state.findIndex((n) => n.id === action.note.id);
-      console.log(index)
       const notes = [
         ...state.slice(0,index),
         Object.assign(state[index],action.note),

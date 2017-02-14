@@ -2,7 +2,7 @@ import React from 'react';
 import NoteDisplay from './notedisplay';
 import NoteEdit from './noteedit';
 import {connect} from 'react-redux';
-import {saveNote,editNote,deleteNote,addNote,getNotes} from '../Helpers/actions'
+import {saveNote,editNote,deleteNote,addNote,getNotes,cancelNote} from '../Helpers/actions'
 import uuid from 'uuid';
 const mapDispatchToNoteEditProps = (dispatch) => (
   {
@@ -11,6 +11,7 @@ const mapDispatchToNoteEditProps = (dispatch) => (
     onDeleteClick: (id) => (dispatch(deleteNote(id))),
     onAddClick: (id, title, contents) => (dispatch(addNote(id, title, contents))),
     getNotesOnLoad: () => (dispatch(getNotes())),
+    onCancelClick: (id) => (dispatch(cancelNote(id))),
   }
 );
 
@@ -25,6 +26,7 @@ class NoteArea extends React.Component {
   }
 
   render () {
+
     return (
       <div>
         {
@@ -35,6 +37,7 @@ class NoteArea extends React.Component {
                 label={'Save'}
                 key={index}
                 onAEClick={this.props.onSaveClick}
+                onCancelClick={this.props.onCancelClick}
               /> :
               <NoteDisplay
                 note={n}

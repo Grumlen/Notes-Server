@@ -27,7 +27,6 @@ class NoteEdit extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const note = this.state;
-    console.log(note.id)
     this.props.onAEClick(note.id, note.title, note.contents);
     note.id = uuid.v4();
     note.title = '';
@@ -44,6 +43,7 @@ class NoteEdit extends React.Component {
         onTitleChange={this.onTitleChange}
         onContentsChange={this.onContentsChange}
         onFormSubmit={this.onFormSubmit}
+        cancelButton={this.props.label==='Save' ? this.props.onCancelClick : null}
       />
     );
   }
