@@ -7,7 +7,7 @@ import Footer from './Components/footer';
 // import reducer from './Helpers/reducers'
 
 const App = () => ( // Completed
-  <div>
+  <div id='App'>
     <Header />
     <NoteArea />
     <Footer />

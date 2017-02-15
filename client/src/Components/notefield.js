@@ -1,7 +1,7 @@
 import React from 'react';
 
 const NoteField = (props) => (
-  <div className='ui text container'>
+  <div className='ui text container column'>
     <div className='ui segments'>
       <form className='ui form' onSubmit={props.onFormSubmit}>
         <input

@@ -22,3 +22,26 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.noteContents {
+  min-height: 3em;
+}
+.noteTitle {
+  overflow-x: auto;
+}
+#App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#header, #footer {
+  flex-grow: 0;
+}
+#footer {
+  margin-top: 1px;
+}
+#noteArea {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 1em;
+}

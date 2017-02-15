@@ -28,30 +28,32 @@ class NoteArea extends React.Component {
   render () {
 
     return (
-      <div>
-        {
-          this.props.notes.map((n,index) => (
-            n.edit ?
-              <NoteEdit
-                note={n}
-                label={'Save'}
-                key={index}
-                onAEClick={this.props.onSaveClick}
-                onCancelClick={this.props.onCancelClick}
-              /> :
-              <NoteDisplay
-                note={n}
-                key={index}
-                onEditClick={this.props.onEditClick}
-                onDeleteClick={this.props.onDeleteClick}
-              />
-          ))
-        }
-        <NoteEdit
-          note={{id:uuid.v4(), title:'', contents:''}}
-          label={'Add'}
-          onAEClick={this.props.onAddClick}
-        />
+      <div className="ui vertical stripe container" id='noteArea'>
+        <div className="ui two column stackable grid">
+          <NoteEdit
+            note={{id:uuid.v4(), title:'', contents:''}}
+            label={'Add'}
+            onAEClick={this.props.onAddClick}
+          />
+          {
+            this.props.notes.map((n,index) => (
+              n.edit ?
+                <NoteEdit
+                  note={n}
+                  label={'Save'}
+                  key={index}
+                  onAEClick={this.props.onSaveClick}
+                  onCancelClick={this.props.onCancelClick}
+                /> :
+                <NoteDisplay
+                  note={n}
+                  key={index}
+                  onEditClick={this.props.onEditClick}
+                  onDeleteClick={this.props.onDeleteClick}
+                />
+            ))
+          }
+        </div>
       </div>
     );
   }

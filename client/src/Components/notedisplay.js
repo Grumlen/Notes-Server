@@ -1,7 +1,7 @@
 import React from 'react';
 
 const NoteDisplay = (props) => (
-  <div className='ui text container'>
+  <div className='ui text container column'>
     <div className='ui segments'>
       <div className='ui segment'>
         <h3>{props.note.title}</h3>
