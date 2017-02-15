@@ -84,7 +84,6 @@ function saveNote(id, title, contents) {
     contents,
     lastEdit: Date(),
   };
-  console.log(note);
   return (dispatch) => {
     dispatch(isLoading(true));
     fetch('/notes/'+id, {
@@ -98,7 +97,6 @@ function saveNote(id, title, contents) {
         return response.json();
       })
       .then ((note) => {
-        console.log(note);
         dispatch(saveNoteState(note));
       })
       .catch((err) => dispatch(hasError(true)));

@@ -13,6 +13,7 @@ class NoteEdit extends React.Component {
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentsChange = this.onContentsChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onCancelClick = this.onCancelClick.bind(this);
   }
   onTitleChange(e) {
     const note = this.state;
@@ -33,6 +34,10 @@ class NoteEdit extends React.Component {
     note.contents = '';
     this.setState(note);
   }
+  onCancelClick(e) {
+    e.preventDefault();
+    this.props.onCancelClick(this.state.id);
+  }
 
   render() {
     return (
@@ -43,7 +48,7 @@ class NoteEdit extends React.Component {
         onTitleChange={this.onTitleChange}
         onContentsChange={this.onContentsChange}
         onFormSubmit={this.onFormSubmit}
-        cancelButton={this.props.label==='Save' ? this.props.onCancelClick : null}
+        cancelButton={this.props.label==='Save' ? this.onCancelClick : null}
       />
     );
   }
